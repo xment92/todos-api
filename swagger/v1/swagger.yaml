@@ -1,0 +1,211 @@
+---
+openapi: 3.0.1
+info:
+  title: TODO-API
+  version: v1
+paths:
+  "/todos/{todo_id}/items":
+    parameters:
+    - name: todo_id
+      in: path
+      description: todo_id
+      required: true
+      schema:
+        type: string
+    - name: Authorization
+      in: header
+      required: true
+      description: Auth token
+      schema:
+        type: string
+    get:
+      summary: list items
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create item
+      parameters: []
+      responses:
+        '201':
+          description: created
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                done:
+                  type: boolean
+                todo_id:
+                  type: integer
+              required:
+              - name
+              - done
+              - todo_id
+  "/todos/{todo_id}/items/{id}":
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Auth token
+      schema:
+        type: string
+    - name: todo_id
+      in: path
+      description: todo_id
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show item
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update item
+      responses:
+        '204':
+          description: successful
+    put:
+      summary: update item
+      responses:
+        '204':
+          description: successful
+    delete:
+      summary: delete item
+      responses:
+        '204':
+          description: successful
+  "/todos":
+    parameters:
+    - name: Authorization
+      in: header
+      required: true
+      description: Auth token
+      schema:
+        type: string
+    get:
+      summary: list todos
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create todo
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                created_by:
+                  type: string
+              required:
+              - title
+              - created_by
+  "/todos/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string
+    - name: Authorization
+      in: header
+      required: true
+      description: Auth token
+      schema:
+        type: string
+    get:
+      summary: show todo
+      responses:
+        '200':
+          description: successful
+    patch:
+      summary: update todo
+      responses:
+        '204':
+          description: successful
+    put:
+      summary: update todo
+      responses:
+        '204':
+          description: successful
+    delete:
+      summary: delete todo
+      responses:
+        '204':
+          description: successful
+  "/signup":
+    post:
+      summary: create user
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                password_confirmation:
+                  type: string
+              required:
+              - name
+              - email
+              - password
+              - password_confirmation
+  "/auth/login":
+    post:
+      summary: Authenticates a user and returns an authentication token
+      tags:
+      - - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: Authentication successful
+        '401':
+          description: Invalid credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  example: password123
+              required:
+              - email
+              - password
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: 127.0.0.1:3000/

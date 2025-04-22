@@ -22,8 +22,9 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
-gem 'bcrypt', '~> 3.1.7'
-gem 'jwt'
+gem "bcrypt", "~> 3.1.7"
+gem "jwt"
+gem "rswag"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -40,17 +41,16 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-
-  gem 'rspec-rails', '~> 7.0.0'
-  gem 'observer'
+  gem "factory_bot_rails", "~> 4.0"
+  gem "rspec-rails", "~> 7.0.0"
+  gem "observer"
+  gem "rubocop"
+  gem "rubocop-rspec"
 end
 
 group :test do
-  gem 'factory_bot_rails', '~> 4.0'
-  gem 'shoulda-matchers', '~> 3.1'
-  gem 'faker'
-  gem 'database_cleaner'
+  # gem "factory_bot_rails", "~> 4.0"
+  gem "shoulda-matchers", "~> 3.1"
+  gem "faker"
+  gem "database_cleaner"
 end
-
-
-

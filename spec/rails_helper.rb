@@ -68,7 +68,7 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
-  #config.include RequestSpecHelper, type: :request
+  # config.include RequestSpecHelper, type: :request
   config.include RequestSpecHelper
   config.include ControllerSpecHelper
 end
@@ -98,3 +98,7 @@ RSpec.configure do |config|
     end
   end
 end
+
+# In spec/rails_helper.rb
+Rails.logger = Logger.new(STDOUT)
+

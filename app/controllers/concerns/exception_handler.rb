@@ -20,7 +20,6 @@ module ExceptionHandler
     rescue_from ExceptionHandler::AuthenticationError, with: :unauthorized_request
     rescue_from ExceptionHandler::MissingToken, with: :four_twenty_two
     rescue_from ExceptionHandler::InvalidToken, with: :four_twenty_two
-
   end
 
   private
@@ -34,6 +33,4 @@ module ExceptionHandler
   def unauthorized_request(e)
     json_response({ message: e.message }, :unauthorized)
   end
-
 end
-
