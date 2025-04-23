@@ -4,6 +4,59 @@ info:
   title: TODO-API
   version: v1
 paths:
+  "/signup":
+    post:
+      summary: create user
+      parameters: []
+      responses:
+        '201':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+                password_confirmation:
+                  type: string
+              required:
+              - name
+              - email
+              - password
+              - password_confirmation
+  "/auth/login":
+    post:
+      summary: Authenticates a user and returns an authentication token
+      tags:
+      - - Authentication
+      parameters: []
+      responses:
+        '200':
+          description: Authentication successful
+        '401':
+          description: Invalid credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: user@example.com
+                password:
+                  type: string
+                  format: password
+                  example: password123
+              required:
+              - email
+              - password
   "/todos/{todo_id}/items":
     parameters:
     - name: todo_id
@@ -151,59 +204,6 @@ paths:
       responses:
         '204':
           description: successful
-  "/signup":
-    post:
-      summary: create user
-      parameters: []
-      responses:
-        '201':
-          description: successful
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                name:
-                  type: string
-                email:
-                  type: string
-                password:
-                  type: string
-                password_confirmation:
-                  type: string
-              required:
-              - name
-              - email
-              - password
-              - password_confirmation
-  "/auth/login":
-    post:
-      summary: Authenticates a user and returns an authentication token
-      tags:
-      - - Authentication
-      parameters: []
-      responses:
-        '200':
-          description: Authentication successful
-        '401':
-          description: Invalid credentials
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                email:
-                  type: string
-                  example: user@example.com
-                password:
-                  type: string
-                  format: password
-                  example: password123
-              required:
-              - email
-              - password
 servers:
 - url: http://{defaultHost}
   variables:
